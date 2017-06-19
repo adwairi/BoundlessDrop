@@ -10,6 +10,8 @@ end
 gem 'rails', '~> 5.0.3'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+# Use mysql2 as the database for Active Record
+gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -34,6 +36,9 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# twitter bootstrap
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
