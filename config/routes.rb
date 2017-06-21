@@ -1,11 +1,25 @@
 Rails.application.routes.draw do
-  get 'user/new'
-  get 'user/:id', to: 'user#show'
-  post '/users',  to: 'user#create'
+  get 'survey/new'
 
-  get 'home/index'
+  get 'survey/edit'
+
+  get 'survey/delete'
+
+  get 'survey/show'
+
+  get 'survey/index'
+
+  devise_for :user
+  post '/user', to: 'user#show'
   root 'home#index'
-  resources :users
+  # get 'home/index'
+
+  # get 'user/edit', to: 'user#show'
+  # get 'user/:id',   to: 'user#show'
+  # get 'user/edit', to: 'user#edit'
+  # post '/sign_in',  to: 'user#create'
+  #
+  resources :user
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
