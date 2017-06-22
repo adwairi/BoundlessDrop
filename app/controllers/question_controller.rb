@@ -15,6 +15,13 @@ class QuestionController < ApplicationController
     end
   end
 
+  def delete
+    @question = SurveyQuestion.find(params[:id])
+      if @question.delete
+        redirect_to  :controller => 'survey', :action => 'show', id: params[:survey_id]
+      end
+  end
+
   private
   def question_params
     params.require(:survey_question).permit(:survey_id, :question_text, :question_type)

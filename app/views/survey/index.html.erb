@@ -13,12 +13,12 @@
                   <div class="widget-notifications-title text-danger"><%= survey.survey_title %></div>
                   <div class="widget-notifications-description"><%= survey.survey_description %></div>
                   <% if survey.user_id == current_user.id %>
-                  <div class="panel-heading-controls pull-right">
-                    <%= link_to 'Edit',url_for(action: :show,id: survey.id) %> |
-                    <%= link_to 'Delete',url_for(action: :delete,id: survey.id),method: :delete, data: {confirm: "Are you sure?"} %>
+                    <div class="panel-heading-controls pull-right">
+                      <%= link_to 'Edit',url_for(action: :show,id: survey.id) %> |
+                      <%= link_to 'Delete',url_for(action: :delete,id: survey.id),method: :delete, data: {confirm: "Are you sure?"} %>
 
-                  </div>
-                      <% end %>
+                    </div>
+                  <% end %>
                 </div>
               </td>
             </tr>

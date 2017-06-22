@@ -20,6 +20,11 @@
                 <div class="widget-notifications-item">
                   <div class="widget-notifications-title"><b><strong>Q<%= index+1 %></strong></b>: <%= question.question_text %></div>
                   <div class="widget-notifications-description"><%= question.question_type %></div>
+                  <% if @survey.user_id == current_user.id %>
+                      <div class="panel-heading-controls pull-right">
+                        <%= link_to 'Delete',url_for(:controller => 'question', :action => 'delete', id: question.id, survey_id: @survey.id),method: :delete, data: {confirm: "Are you sure?"} %>
+                      </div>
+                  <% end %>
                 </div>
               </td>
             </tr>

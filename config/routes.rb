@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   get 'question/add_question'
   post 'question/save_question'
+  delete 'question/delete/:id', to: 'question#delete'
 
 
   devise_for :user
