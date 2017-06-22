@@ -1,2 +1,10 @@
-<h1>Survey#show</h1>
-<p>Find me in app/views/survey/show.html.erb</p>
+<%= @survey.survey_title %>
+<%= @survey.survey_description %>
+<%= @survey.created_at %>
+
+<% if !@questions.nil? %>
+<% @questions.each do |question| %>
+        <%= question.question_text %>
+        <%= question.question_type %>
+    <% end %>
+<% end %>

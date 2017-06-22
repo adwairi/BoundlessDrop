@@ -1,0 +1,45 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <%= form_for(@survey, url: 'save_survey') do |f| %>
+        <%= survey_error_messages! %>
+
+      <div class="modal-header">
+        <h4 class="modal-title">Add Survey</h4>
+      </div>
+      <div class="modal-body">
+
+          <%= f.label :Title %>
+          <%= f.text_field :survey_title %>
+
+          <%= f.label :Description %>
+          <%= f.text_area :survey_description %>
+
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn pull-left" data-dismiss="modal">
+            <span class="btn-label-icon left fa fa-times"></span>Close
+          </button>
+          <button type="submit" class="btn pull-right" >
+          <span class="btn-label-icon left fa fa-save"></span>Next
+          </button>
+          <div class="clearfix"></div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      $('#reviewer_form').submit(function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+        }).done(function (msg) {
+            $('#ajaxModalDialog').html(msg);
+        }).fail(function () {
+            window.location.reload();
+        });
+
+    });
+</script>

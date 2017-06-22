@@ -1,3 +1,17 @@
 // Place all the styles related to the Survey controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// Override Zebra-striping
+//
+// Default zebra-stripe styles (alternating gray and transparent backgrounds)
+
+//** Background color used for `.table-striped`.
+$table-bg-accent:               #ececec !default;
+
+.table-striped {
+  > tbody > tr:nth-of-type(odd) {
+    background-color: #ececec;
+  }
+}

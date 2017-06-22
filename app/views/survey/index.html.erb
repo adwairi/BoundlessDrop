@@ -1,7 +1,5 @@
 <div class="panel-heading-controls pull-right">
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-default">
-    Create Survey
-  </button>
+  <a href="/survey/add_survey" class="btn btn-primary btn-lg" data-toggle="ajaxModal">Add Survey</a>
 </div>
 <div class="col-xs-12 ">
   <h4 class="m-t-0 m-b-2 font-weight-semibold text-muted">Survey List</h4>
@@ -9,21 +7,26 @@
     <tbody>
     <% if !@surveys.nil? %>
         <% @surveys.each do |survey| %>
-        <tr>
-          <td>
-            <div class="widget-notifications-item">
-              <div class="widget-notifications-title text-danger"><%= survey.survey_title %></div>
-              <div class="widget-notifications-description"><%= survey.survey_description %></div>
-            </div>
-          </td>
-        </tr>
+            <tr>
+              <td>
+                <div class="widget-notifications-item">
+                  <div class="widget-notifications-title text-danger"><%= survey.survey_title %></div>
+                  <div class="widget-notifications-description"><%= survey.survey_description %></div>
+                  <% if survey.user_id == current_user.id %>
+                  <div class="panel-heading-controls pull-right">
+                    <a href="/survey/<%= survey.id %>" class="btn btn-primary btn-sm">edit</a>
+                  </div>
+                      <% end %>
+                </div>
+              </td>
+            </tr>
         <% end %>
     <% else %>
-      <tr>
-        <td>
-          <h3 class="text-center m-a-0">There are no surveys</h3>
-        </td>
-      </tr>
+        <tr>
+          <td>
+            <h3 class="text-center m-a-0">There are no surveys</h3>
+          </td>
+        </tr>
     <% end %>
     </tbody>
   </table>

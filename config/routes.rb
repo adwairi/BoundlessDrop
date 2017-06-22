@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'survey/new'
+  get 'question/add_question'
 
   get 'survey/edit'
 
@@ -7,7 +7,17 @@ Rails.application.routes.draw do
 
   get 'survey/show'
 
-  get 'survey/index'
+  get 'survey/index', to: 'survey#index'
+  get 'survey/', to: 'survey#index'
+
+  get 'survey/:id', to: 'survey#show'
+
+  get 'survey/add_survey'
+  post 'survey/save_survey'
+
+  get 'question/add_question'
+  post 'question/save_question'
+
 
   devise_for :user
   post '/user', to: 'user#show'
