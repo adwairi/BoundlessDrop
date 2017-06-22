@@ -8,12 +8,18 @@ class SurveyController < ApplicationController
   end
 
   def delete
+    @survey = Survey.find(params[:id])
+    if @survey.user_id == current_user.id
+      if @survey.delete
+        redirect_to survey_index_path
+      end
+    end
   end
 
   def show
     @survey = Survey.find(params[:id])
     if @survey.user_id == current_user.id
-      @questions = SurveyQuestion.where('survey_id': params[:id])
+      @questions = SurveyQuestion.where('survey_id': @survey.id)
     else
       redirect_to survey_index_path
     end
@@ -26,7 +32,7 @@ class SurveyController < ApplicationController
   def save_survey
     @survey = Survey.new(survey_params)
     if @survey.save
-      redirect_to :controller => 'question', :action => 'add_question', :survey_id => @survey.id
+      redirect_to :controller => 'question', :action => 'add_question', :survey_id => @survey.id, :authenticity_token => params[:authenticity_token]
     else
       render 'add_survey'
     end

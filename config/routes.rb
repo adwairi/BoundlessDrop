@@ -4,13 +4,15 @@ Rails.application.routes.draw do
   get 'survey/edit'
 
   get 'survey/delete'
+  delete 'survey/delete/:id', to: 'survey#delete'
 
   get 'survey/show'
+  get 'survey/show/:id', to: 'survey#show'
 
-  get 'survey/index', to: 'survey#index'
+  get 'survey/index'
   get 'survey/', to: 'survey#index'
 
-  get 'survey/:id', to: 'survey#show'
+
 
   get 'survey/add_survey'
   post 'survey/save_survey'

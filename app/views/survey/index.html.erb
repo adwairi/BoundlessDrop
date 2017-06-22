@@ -1,5 +1,5 @@
 <div class="panel-heading-controls pull-right">
-  <a href="/survey/add_survey" class="btn btn-primary btn-lg" data-toggle="ajaxModal">Add Survey</a>
+  <a href="/survey/add_survey" class="btn btn-primary btn-lg">Add Survey</a>
 </div>
 <div class="col-xs-12 ">
   <h4 class="m-t-0 m-b-2 font-weight-semibold text-muted">Survey List</h4>
@@ -14,7 +14,9 @@
                   <div class="widget-notifications-description"><%= survey.survey_description %></div>
                   <% if survey.user_id == current_user.id %>
                   <div class="panel-heading-controls pull-right">
-                    <a href="/survey/<%= survey.id %>" class="btn btn-primary btn-sm">edit</a>
+                    <%= link_to 'Edit',url_for(action: :show,id: survey.id) %> |
+                    <%= link_to 'Delete',url_for(action: :delete,id: survey.id),method: :delete, data: {confirm: "Are you sure?"} %>
+
                   </div>
                       <% end %>
                 </div>

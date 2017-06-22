@@ -8,17 +8,17 @@
       </div>
       <div class="modal-body">
 
-          <%= f.label :Title %>
+          <%= f.label :title %>
           <%= f.text_field :survey_title %>
 
-          <%= f.label :Description %>
+          <%= f.label :description %>
           <%= f.text_area :survey_description %>
 
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn pull-left" data-dismiss="modal">
-            <span class="btn-label-icon left fa fa-times"></span>Close
-          </button>
+        <button type="button" class="btn pull-left" onclick="window.location.href='/survey/index'">
+          <span class="btn-label-icon left"><i class="fa fa-times"></i></span>Cancel
+        </button>
           <button type="submit" class="btn pull-right" >
           <span class="btn-label-icon left fa fa-save"></span>Next
           </button>
@@ -27,19 +27,3 @@
     <% end %>
   </div>
 </div>
-<script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      $('#reviewer_form').submit(function(e){
-        e.preventDefault();
-
-        $.ajax({
-            type: "POST",
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-        }).done(function (msg) {
-            $('#ajaxModalDialog').html(msg);
-        }).fail(function () {
-            window.location.reload();
-        });
-
-    });
-</script>

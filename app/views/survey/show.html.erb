@@ -1,10 +1,36 @@
-<%= @survey.survey_title %>
-<%= @survey.survey_description %>
-<%= @survey.created_at %>
 
-<% if !@questions.nil? %>
-<% @questions.each do |question| %>
-        <%= question.question_text %>
-        <%= question.question_type %>
+
+<div class="panel-heading-controls pull-right">
+  <a href="/question/add_question?survey_id=<%= @survey.id %>" class="btn btn-primary btn-lg">Add Question</a>
+</div>
+<div class="col-xs-12 ">
+  <div class="table-header">
+    <div class="table-caption">
+      <h3 class="m-t-0 m-b-2 font-weight-semibold text-center"><%= @survey.survey_title %></h3>
+      <h5 class="m-t-0 m-b-2 font-weight-semibold text-muted"><%= @survey.survey_description %></h5>
+    </div>
+  </div>
+
+  <table class="table table-striped table-bordered" id="sortable-3">
+    <tbody>
+    <% if !@questions.nil? %>
+        <% @questions.each_with_index do |question, index| %>
+            <tr>
+              <td>
+                <div class="widget-notifications-item">
+                  <div class="widget-notifications-title"><b><strong>Q<%= index+1 %></strong></b>: <%= question.question_text %></div>
+                  <div class="widget-notifications-description"><%= question.question_type %></div>
+                </div>
+              </td>
+            </tr>
+        <% end %>
+    <% else %>
+        <tr>
+          <td>
+            <h3 class="text-center m-a-0">There are no questions</h3>
+          </td>
+        </tr>
     <% end %>
-<% end %>
+    </tbody>
+  </table>
+</div>
