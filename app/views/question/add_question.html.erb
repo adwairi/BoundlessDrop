@@ -1,0 +1,50 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <%= form_for(@question, url: question_save_question_path) do |f| %>
+        <%= question_error_messages! %>
+
+    <div class="modal-header">
+      <h4 class="modal-title">Add Question</h4>
+    </div>
+    <div class="modal-body">
+
+      <%= f.label :Question_Text %>
+      <%= f.text_area :question_text %>
+
+      <%= f.label :Question_Type %>
+      <%= f.select(:question_type) do %>
+          <% [
+                 ['__select type__', ''],
+                 ['Comment/Essay Box', 1],
+                 ['Multiple Choice (Only One Answer)', 2],
+                 ['Multiple Choice (Multiple Answers)', 3],
+                 ['DropDown list (Only One Answer)', 4]
+             ].each do |c| -%>
+              <%= content_tag(:option, c.first, value: c.last) %>
+          <% end %>
+      <% end %>
+      <%= f.hidden_field(:survey_id, {:value => @survey_id}) %>
+      <!--onchange="choose_question_type();"-->
+
+
+      <!--<div id="question_type">-->
+        <!--<?php echo $question->draw_add_edit(); ?>-->
+      <!--</div>-->
+
+      <div class="clearfix"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn pull-left" onclick="window.location.href='/survey/show/<%= @survey_id %>'">
+          <span class="btn-label-icon left"><i class="fa fa-times"></i></span>Cancel
+      </button>
+      <button type="submit" class="btn pull-right "><span class="btn-label-icon left"><i class="fa fa-floppy-o"></i></span>Save</button>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+    function choose_question_type() {
+        do_post_submit('/examination/question_bank/question_types', 'new_survey_question', 'question_type');
+    }
+</script>
