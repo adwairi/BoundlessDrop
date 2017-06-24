@@ -8,7 +8,13 @@ class QuestionController < ApplicationController
 
   def save_question
     @question = SurveyQuestion.new(question_params)
+
     if @question.save
+      if params[:type] != 1 && !params[:options].blank?
+        @options = params[:options]
+        @question_id = @question.id
+        OptionController.saveOptions(@options, @question_id)
+      end
       redirect_to :controller => 'survey', :action => 'show', :id => @question.survey_id
     else
       render 'add_question'
@@ -18,6 +24,10 @@ class QuestionController < ApplicationController
   def delete
     @question = SurveyQuestion.find(params[:id])
       if @question.delete
+        @options = QuestionOption.where(:survey_question_id => params[:id])
+        for option in @options
+          option.delete
+        end
         redirect_to  :controller => 'survey', :action => 'show', id: params[:survey_id]
       end
   end

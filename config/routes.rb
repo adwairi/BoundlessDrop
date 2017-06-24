@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # resources :question
+  resources :option
+
   get 'question/add_question'
 
   get 'survey/edit'

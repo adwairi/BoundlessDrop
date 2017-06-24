@@ -12,24 +12,25 @@
       <%= f.text_area :question_text %>
 
       <%= f.label :Question_Type %>
+
+
       <%= f.select(:question_type) do %>
           <% [
                  ['__select type__', ''],
-                 ['Comment/Essay Box', 1],
-                 ['Multiple Choice (Only One Answer)', 2],
-                 ['Multiple Choice (Multiple Answers)', 3],
-                 ['DropDown list (Only One Answer)', 4]
+                 ['Comment/Essay Box', 'textarea'],
+                 ['Multiple Choice (Only One Answer)', 'radio'],
+                 ['Multiple Choice (Multiple Answers)', 'checkbox'],
+                 ['DropDown list (Only One Answer)', 'dropdown']
              ].each do |c| -%>
               <%= content_tag(:option, c.first, value: c.last) %>
           <% end %>
       <% end %>
       <%= f.hidden_field(:survey_id, {:value => @survey_id}) %>
-      <!--onchange="choose_question_type();"-->
 
+        <div id="question_options">
+        </div>
+        <a href="javascript:;" id="addNewOption">Add New Option</a>
 
-      <!--<div id="question_type">-->
-        <!--<?php echo $question->draw_add_edit(); ?>-->
-      <!--</div>-->
 
       <div class="clearfix"></div>
     </div>
@@ -43,8 +44,38 @@
   </div>
 </div>
 
-<script type="text/javascript">
-    function choose_question_type() {
-        do_post_submit('/examination/question_bank/question_types', 'new_survey_question', 'question_type');
-    }
+<div style="display: none;" id="new_option_form">
+  <% @form = "form" %>
+  <%= render partial: @form, locals: {option: false} %>
+</div>
+
+<script>
+    $( document ).ready(function() {
+        type = $("#survey_question_question_type").val()
+        if (type == 'textarea' || type =='')
+          $("#addNewOption").hide();
+        else
+          $("#addNewOption").show();
+    });
+
+    $("#survey_question_question_type").on("change",function() {
+        switch($(this).val()){
+            case 'radio':
+            case 'checkbox':
+            case 'dropdown':
+                $("#addNewOption").show();
+                break;
+            default:
+                $("#addNewOption").hide();
+                $("#question_options").html('');
+                break;
+        }
+    });
+    $("#addNewOption").on("click", function() {
+        $("#question_options").append($("#new_option_form").html());
+    });
+
+    function removeOption(element) {
+        return element.parent().remove();
+    };
 </script>
