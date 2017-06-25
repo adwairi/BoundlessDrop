@@ -1,1 +1,4 @@
-<input type="checkbox" />
+
+<% question.question_options.each do |option| %>
+    <input type="checkbox" name="q_<%= question.id %>" value="<%= option.select_option_value %>" /> <%= option.option_text %> <br />
+<% end %>

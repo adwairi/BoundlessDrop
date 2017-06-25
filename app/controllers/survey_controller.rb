@@ -18,10 +18,9 @@ class SurveyController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
+    @can_manage = false
     if @survey.user_id == current_user.id
-      @questions = SurveyQuestion.where('survey_id': @survey.id)
-    else
-      redirect_to survey_index_path
+      @can_manage = true
     end
   end
 

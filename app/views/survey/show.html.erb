@@ -1,7 +1,9 @@
 <% provide(:title, 'Survey: ' + @survey.survey_title) %>
+<% if @can_manage %>
 <div class="panel-heading-controls pull-right">
   <a href="/question/add_question?survey_id=<%= @survey.id %>" class="btn btn-primary btn-lg">Add Question</a>
 </div>
+<% end %>
 <div class="col-xs-12 ">
   <div class="table-header">
     <div class="table-caption">
@@ -12,20 +14,18 @@
 
   <table class="table table-striped table-bordered" id="sortable-3">
     <tbody>
-    <% if !@questions.nil? %>
-        <% @questions.each_with_index do |question, index| %>
+    <% if !@survey.survey_questions.blank? %>
+        <% @survey.survey_questions.each_with_index do |question, index| %>
             <tr>
               <td>
                 <div class="widget-notifications-item">
                   <div class="widget-notifications-title"><b><strong>Q<%= index+1 %></strong></b>: <%= question.question_text %></div>
-                  <div class="widget-notifications-description">
-                    <%= render partial: question.question_type, locals: {options: question.options} %>
-                  </div>
-                  <% if @survey.user_id == current_user.id %>
+                    <%= render partial: question.question_type, locals: {question: question} %>
+                    <% if @can_manage %>
                       <div class="panel-heading-controls pull-right">
                         <%= link_to 'Delete',url_for(:controller => 'question', :action => 'delete', id: question.id, survey_id: @survey.id),method: :delete, data: {confirm: "Are you sure?"} %>
                       </div>
-                  <% end %>
+                    <% end %>
                 </div>
               </td>
             </tr>
