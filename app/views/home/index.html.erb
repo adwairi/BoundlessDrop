@@ -2,11 +2,14 @@
 
 <div class="center jumbotron">
   <h1>Welcome to the Online Survey</h1>
-  <h2>
-    This is the home page for the Online Survey!
-  </h2>
   <% if user_signed_in? %>
-    <%= link_to "Survey", 'survey/index', class: "btn btn-lg btn-primary" %>
+      <h2> Create new
+          <%= link_to "Survey", 'survey/index', class: "btn btn-lg btn-primary" %>
+      </h2>
+  <% else %>
+      <h2>
+        To create new survey, please <%= link_to "Log in", new_user_session_path %>
+      </h2>
   <% end %>
 </div>
 

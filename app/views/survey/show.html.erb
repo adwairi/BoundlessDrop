@@ -23,7 +23,10 @@
     <div class="table-caption">
       <h3 class="m-t-0 m-b-2 font-weight-semibold text-center"><%= @survey.survey_title %></h3>
       <% if @survey.published %>
-          <h5 class="m-t-0 m-b-2 font-weight-semibold text-muted text-center"><%= @survey.published_url %></h5>
+          <h5 class="m-t-0 m-b-2 font-weight-semibold text-muted text-center">
+            <b><strong>External Link: </strong></b>
+            <a href="<%= root_url+'online-survey?survey='+@survey.id.to_s %>"> <%= root_url+'online-survey?survey='+@survey.id.to_s %> </a>
+          </h5>
     <% end %>
       <h5 class="m-t-0 m-b-2 font-weight-semibold text-muted"><%= @survey.survey_description %></h5>
     </div>
