@@ -4,7 +4,8 @@ class CreateSurveys < ActiveRecord::Migration[5.0]
       t.string :survey_title
       t.string :survey_description
       t.integer :user_id
-      t.boolean :deleted, :default => false
+      t.boolean :published, default: false
+      t.string :published_url
       t.timestamps
     end
   end

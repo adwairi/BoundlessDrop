@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # resources :question
   resources :option
+  resources :answer
 
   get 'question/add_question'
 
@@ -12,10 +13,13 @@ Rails.application.routes.draw do
   get 'survey/show'
   get 'survey/show/:id', to: 'survey#show'
 
+  post 'survey/publish', to: 'survey#publish'
+
   get 'survey/index'
   get 'survey/', to: 'survey#index'
 
-
+  get 'online-survey', to: 'answer#start'
+  post 'online-survey', to: 'answer#create'
 
   get 'survey/add_survey'
   post 'survey/save_survey'
