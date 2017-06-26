@@ -1,0 +1,12 @@
+<% provide(:title, 'Survey: ' + @survey.survey_title) %>
+<%= @answer %>
+<%= @answers %>
+<div class="col-xs-12 ">
+  <div class="table-header">
+    <div class="table-caption">
+      <h3 class="m-t-0 m-b-2 font-weight-semibold text-center"><%= @survey.survey_title %></h3>
+      <h5 class="m-t-0 m-b-2 font-weight-semibold text-muted"><%= @survey.survey_description %></h5>
+    </div>
+  </div>
+  <%= render 'form' %>
+</div>

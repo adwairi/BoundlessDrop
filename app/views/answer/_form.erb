@@ -1,0 +1,22 @@
+<%= form_for 'answer/create' do %>
+    <table class="table table-striped table-bordered" id="sortable-3">
+      <tbody>
+      <% @survey.survey_questions.each_with_index do |question, index| %>
+          <tr>
+            <td>
+              <div class="widget-notifications-item">
+                <div class="widget-notifications-title"><b><strong>Q<%= index+1 %></strong></b>: <%= question.question_text %></div>
+                <%= render partial: question.question_type, locals: {question: question, survey_id: @survey.id} %>
+              </div>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="modal-footer">
+      <button type="submit" class="btn pull-right" >
+        <span class="btn-label-icon left fa fa-save"></span>Submit
+      </button>
+      <div class="clearfix"></div>
+    </div>
+<% end %>

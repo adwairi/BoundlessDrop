@@ -23,9 +23,11 @@ ActiveRecord::Schema.define(version: 20170621115019) do
 
   create_table "survey_answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "survey_id"
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "survey_question_id"
+    t.string   "answer"
+    t.string   "validator_key"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "survey_questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -43,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170621115019) do
     t.boolean  "published",          default: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.string   "published_url"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

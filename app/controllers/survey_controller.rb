@@ -1,4 +1,6 @@
 class SurveyController < ApplicationController
+  before_action :authenticate_user!
+
   skip_before_filter :verify_authenticity_token
   def index
     @surveys = Survey.where('user_id': current_user.id)
@@ -54,6 +56,10 @@ class SurveyController < ApplicationController
           render :json => {status:flase}
         end
       end
+  end
+
+  def answers
+    @survey = Survey.find(params[:survey_id])
   end
 
   private

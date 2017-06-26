@@ -15,13 +15,13 @@ Rails.application.routes.draw do
   get 'survey/show'
   get 'survey/show/:id', to: 'survey#show'
   get 'survey/delete'
+  get 'survey/answers'
   delete 'survey/delete/:id', to: 'survey#delete'
   post 'survey/save_survey'
   post 'survey/publish', to: 'survey#publish'
 
 
-  get 'online-survey', to: 'answer#start'
-  get 'online-survey/success', to: 'answer#success'
+  get 'online-survey', to: 'answer#show'
   post 'online-survey', to: 'answer#create'
 
 
@@ -30,12 +30,6 @@ Rails.application.routes.draw do
   devise_for :user
   post '/user', to: 'user#show'
   root 'home#index'
-  # get 'home/index'
-
-  # get 'user/edit', to: 'user#show'
-  # get 'user/:id',   to: 'user#show'
-  # get 'user/edit', to: 'user#edit'
-  # post '/sign_in',  to: 'user#create'
   #
   resources :user
 

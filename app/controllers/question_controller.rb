@@ -1,5 +1,5 @@
 class QuestionController < ApplicationController
-
+  before_action :authenticate_user!
   def add_question
     @survey_id = params[:survey_id]
     @authenticity_token = params[:authenticity_token]

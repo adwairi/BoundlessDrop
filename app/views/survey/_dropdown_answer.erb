@@ -1,0 +1,7 @@
+<%= question.survey_answers.size %>
+<br>
+<select class="form-control" >
+  <% question.question_options.each do |option| %>
+      <option > <%= option.option_text %> (<%= question.survey_answers.where('answer': option.id).size %>) </option>
+  <% end %>
+</select>

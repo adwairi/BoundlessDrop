@@ -1,4 +1,6 @@
 class OptionController < ApplicationController
+  before_action :authenticate_user!
+
   attr_accessor :option_text
 
   def self.saveOptions (options = {}, question_id = 0)
