@@ -1,7 +1,17 @@
-<%= question.survey_answers.size %>
+<% @answerRecord = SurveyAnswer.where(:survey_question_id => question.id, :validator_key => validator_key)
+   if !@answerRecord.blank?
+     @answer = @answerRecord.first.answer
+   end
+   @selected = '';
+%>
 <br>
-<select class="form-control" >
-  <% question.question_options.each do |option| %>
-      <option > <%= option.option_text %> (<%= question.survey_answers.where('answer': option.id).size %>) </option>
+<select class="form-control" disabled >
+  <% question.question_options.each do |option|
+        if !@answer.nil? && option.select_option_value == @answer.to_i
+          @selected = "selected"
+        end
+  %>
+
+      <option value="<%= option.select_option_value %>" <%= @selected %> ><%= option.option_text %></option>
   <% end %>
 </select>

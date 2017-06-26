@@ -1,6 +1,18 @@
-<% question.question_options.each do |option| %>
+<% @answerRecord = SurveyAnswer.where(:survey_question_id => question.id, :validator_key => validator_key)
+   if !@answerRecord.blank?
+      @answer = @answerRecord.first.answer
+   end
+   @checked = ""
+%>
+<% question.question_options.each do |option|
+    if !@answer.nil? && option.select_option_value == @answer.to_i
+      @checked = "checked"
+    else
+      @checked = ""
+    end
+%>
     <div class="radio">
-      <label><input type="radio"><%= option.option_text %></label>
+      <label><input type="radio" value="<%= option.select_option_value %>" <%= @checked %> disabled ><%= option.option_text %></label>
     </div>
 <% end %>
 

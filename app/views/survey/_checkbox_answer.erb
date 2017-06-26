@@ -1,5 +1,19 @@
-<% question.question_options.each do |option| %>
+<% require 'yaml' %>
+<% @answerRecord = SurveyAnswer.where(:survey_question_id => question.id, :validator_key => validator_key)
+   if !@answerRecord.blank?
+     @answer = @answerRecord.first.answer
+   end
+%>
+
+<% question.question_options.each do |option|
+  @x = option.select_option_value.to_s
+  if @answer.include? @x
+    @checked = "checked"
+  else
+    @checked = ""
+  end
+%>
     <div class="checkbox">
-      <label><input type="checkbox" value=""><%= option.option_text %></label>
+      <label><input type="checkbox" value="<%= option.select_option_value %>" <%= @checked %> disabled ><%= option.option_text %></label>
     </div>
 <% end %>

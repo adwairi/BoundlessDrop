@@ -59,9 +59,25 @@ class SurveyController < ApplicationController
   end
 
   def answers
+    @answers = []
     @survey = Survey.find(params[:survey_id])
+    @survey.survey_questions.each do |question|
+      question.survey_answers.each do |answer|
+        @x = answer.validator_key
+        if !@answers.include?@x
+          @answers.push(answer.validator_key)
+        end
+      end
+    end
   end
 
+  def answer_details
+    @survey = Survey.find(params[:survey])
+    @validator_key = params[:validator_key]
+    @survey_answers = SurveyAnswer.where(:validator_key => params[:validator_key]).all
+
+
+  end
   private
   def survey_params
     params[:survey][:user_id] = current_user.id

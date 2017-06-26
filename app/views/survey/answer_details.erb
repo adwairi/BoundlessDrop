@@ -1,0 +1,47 @@
+<% provide(:title, 'Survey Answers: ' + @survey.survey_title) %>
+
+<div class="col-xs-12 ">
+  <div class="table-header">
+    <div class="table-caption">
+      <h3 class="m-t-0 m-b-2 font-weight-semibold text-center"><%= @survey.survey_title %></h3>
+      <h5 class="m-t-0 m-b-2 font-weight-semibold text-muted"><%= @survey.survey_description %></h5>
+    </div>
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <tbody>
+        <% @survey.survey_questions.each_with_index do |question, index| %>
+            <tr>
+              <td>
+                <div class="form-group">
+                  <div class="widget-notifications-title"><b><strong>Q<%= index+1 %></strong></b>: <%= question.question_text %></div>
+                  <%= render partial: question.question_type + '_answer', locals: {question: question, validator_key: @validator_key} %>
+                </div>
+              </td>
+            </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+
+    $('#publish').on('click', function () {
+        $.ajax({
+            type: "POST",
+            url: "/survey/publish",
+            data: { survey_id: $(this).attr('data-id') },
+            dataType: "json"
+        }).done(function (msg) {
+            if (msg.status) {
+                window.location = msg.html;
+            } else {
+                window.location.reload();
+            }
+        }).fail(function () {
+            window.location.reload();
+        });
+        return false;
+    });
+
+</script>

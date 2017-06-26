@@ -1,2 +1,8 @@
+<% @answerRecord = SurveyAnswer.where(:survey_question_id => question.id, :validator_key => validator_key)
+   @answer = ''
+   if !@answerRecord.blank?
+     @answer = @answerRecord.first.answer
+   end
+%>
 <br>
-<textarea class="form-control" ></textarea>
+<textarea class="form-control" disabled ><%= @answer %></textarea>

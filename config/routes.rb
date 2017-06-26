@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'survey/show/:id', to: 'survey#show'
   get 'survey/delete'
   get 'survey/answers'
+  get 'survey/answer_details'
   delete 'survey/delete/:id', to: 'survey#delete'
   post 'survey/save_survey'
   post 'survey/publish', to: 'survey#publish'
