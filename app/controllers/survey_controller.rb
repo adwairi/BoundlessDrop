@@ -19,9 +19,15 @@ class SurveyController < ApplicationController
   def show
     @survey = Survey.find(params[:id])
     @can_manage = false
-    if @survey.user_id == current_user.id
+    @can_publish = false
+    if @survey.user_id == current_user.id && !@survey.published
       @can_manage = true
     end
+
+    if !@survey.survey_questions.blank?
+      @can_publish = true
+    end
+
   end
 
   def add_survey
@@ -37,6 +43,18 @@ class SurveyController < ApplicationController
     end
   end
 
+  def publish
+
+      @survey = Survey.find(params[:survey_id])
+      if @survey.user_id == current_user.id && !@survey.survey_questions.blank?
+        @survey.published = true
+        if @survey.save
+          render :json => {status:true, html: survey_show_path + '/' +params[:survey_id] }
+        else
+          render :json => {status:flase}
+        end
+      end
+  end
 
   private
   def survey_params

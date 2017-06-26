@@ -1,0 +1,4 @@
+
+<% question.question_options.each do |option| %>
+    <input type="checkbox" name="answer[<%= survey_id %>][<%= question.id %>][]" value="<%= option.select_option_value %>" /> <%= option.option_text %> <br />
+<% end %>

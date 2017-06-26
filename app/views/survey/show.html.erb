@@ -1,4 +1,10 @@
 <% provide(:title, 'Survey: ' + @survey.survey_title) %>
+<% if @can_publish && @can_manage %>
+<div class="panel-heading-controls pull-left">
+  <a href="#" id="publish" data-id="<%= @survey.id %>" class="btn btn-primary btn-lg">Publish Survey</a>
+</div>
+<% end %>
+
 <% if @can_manage %>
 <div class="panel-heading-controls pull-right">
   <a href="/question/add_question?survey_id=<%= @survey.id %>" class="btn btn-primary btn-lg">Add Question</a>
@@ -40,3 +46,25 @@
     </tbody>
   </table>
 </div>
+
+<script type="text/javascript">
+
+    $('#publish').on('click', function () {
+        $.ajax({
+            type: "POST",
+            url: "/survey/publish",
+            data: { survey_id: $(this).attr('data-id') },
+            dataType: "json"
+        }).done(function (msg) {
+            if (msg.status) {
+                window.location = msg.html;
+            } else {
+                window.location.reload();
+            }
+        }).fail(function () {
+            window.location.reload();
+        });
+        return false;
+    });
+
+</script>
