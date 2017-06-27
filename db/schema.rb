@@ -13,19 +13,18 @@
 ActiveRecord::Schema.define(version: 20170621115019) do
 
   create_table "question_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "select_option_value"
     t.integer  "survey_question_id"
     t.string   "option_text"
-    t.boolean  "deleted",             default: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "select_option_value"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "survey_answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "validator_key"
     t.integer  "survey_id"
     t.integer  "survey_question_id"
     t.string   "answer"
-    t.string   "validator_key"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
@@ -43,16 +42,13 @@ ActiveRecord::Schema.define(version: 20170621115019) do
     t.string   "survey_description"
     t.integer  "user_id"
     t.boolean  "published",          default: false
+    t.string   "published_url"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.string   "published_url"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "username"
     t.string   "email"
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "password"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false

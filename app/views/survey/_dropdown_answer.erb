@@ -10,6 +10,8 @@
   <% question.question_options.each do |option|
         if !@answer.nil? && option.select_option_value == @answer.to_i
           @selected = "selected"
+          else
+          @selected = ''
         end
   %>
 
